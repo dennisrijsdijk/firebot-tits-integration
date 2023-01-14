@@ -1,4 +1,5 @@
 import {Firebot, ScriptModules} from "@crowbartools/firebot-custom-scripts-types";
+import {TITSEventSource} from "./events";
 
 interface Params {
   baseEndpoint: string;
@@ -27,6 +28,7 @@ const script: Firebot.CustomScript<Params> = {
   run: (runRequest) => {
     baseEndpoint = runRequest.parameters.baseEndpoint;
     modules = runRequest.modules;
+    modules.eventManager.registerEventSource(TITSEventSource);
   },
 };
 
