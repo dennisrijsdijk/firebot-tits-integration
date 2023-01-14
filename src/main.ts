@@ -1,33 +1,36 @@
-import { Firebot } from "@crowbartools/firebot-custom-scripts-types";
+import {Firebot, ScriptModules} from "@crowbartools/firebot-custom-scripts-types";
 
 interface Params {
-  message: string;
+  baseEndpoint: string;
 }
 
 const script: Firebot.CustomScript<Params> = {
   getScriptManifest: () => {
     return {
-      name: "Starter Custom Script",
-      description: "A starter custom script for build",
-      author: "SomeDev",
+      name: "T.I.T.S Integration",
+      description: "Twitch Integrated Throwing System for Firebot",
+      author: "DennisOnTheInternet",
       version: "1.0",
       firebotVersion: "5",
     };
   },
   getDefaultParameters: () => {
     return {
-      message: {
+      baseEndpoint: {
         type: "string",
-        default: "Hello World!",
-        description: "Message",
-        secondaryDescription: "Enter a message here",
+        default: "ws://127.0.0.1:42069",
+        description: "T.I.T.S Websocket Address",
+        secondaryDescription: "The Websocket connection address for T.I.T.S. Defaults to ws://127.0.0.1:42069",
       },
     };
   },
   run: (runRequest) => {
-    const { logger } = runRequest.modules;
-    logger.info(runRequest.parameters.message);
+    baseEndpoint = runRequest.parameters.baseEndpoint;
+    modules = runRequest.modules;
   },
 };
+
+export let modules: ScriptModules;
+export let baseEndpoint: string;
 
 export default script;
