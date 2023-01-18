@@ -1,6 +1,12 @@
 import {Firebot, ScriptModules} from "@crowbartools/firebot-custom-scripts-types";
 import {TITSEventSource} from "./events";
 import {disconnectSockets, initializeSockets} from "./tits-connector";
+import {ZDirectionVariable} from "./variables/throw-event/z";
+import {XDirectionVariable} from "./variables/throw-event/x";
+import {YDirectionVariable} from "./variables/throw-event/y";
+import {ItemIdVariable} from "./variables/throw-event/item-id";
+import {ItemNameVariable} from "./variables/throw-event/item-name";
+import {StrengthVariable} from "./variables/throw-event/strength";
 
 interface Params {
   baseEndpoint: string;
@@ -30,6 +36,12 @@ const script: Firebot.CustomScript<Params> = {
     baseEndpoint = runRequest.parameters.baseEndpoint;
     modules = runRequest.modules;
     modules.eventManager.registerEventSource(TITSEventSource);
+    modules.replaceVariableManager.registerReplaceVariable(ItemIdVariable);
+    modules.replaceVariableManager.registerReplaceVariable(ItemNameVariable);
+    modules.replaceVariableManager.registerReplaceVariable(StrengthVariable);
+    modules.replaceVariableManager.registerReplaceVariable(XDirectionVariable);
+    modules.replaceVariableManager.registerReplaceVariable(YDirectionVariable);
+    modules.replaceVariableManager.registerReplaceVariable(ZDirectionVariable);
     initializeSockets();
   },
   parametersUpdated(parameters: Params) {
