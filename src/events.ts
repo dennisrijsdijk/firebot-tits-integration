@@ -10,13 +10,13 @@ export const TITSEventSource: EventSource = {
             description: "When an object hits you in T.I.T.S",
             manualMetadata: {
                 itemID: "00000000-0000-0000-0000-000000000000",
-                itemName: "Test Item",
+                itemName: "testItem",
+                triggerID: "00000000-0000-0000-0000-000000000000",
+                triggerName: "testTrigger",
                 strength: 24.8588161,
                 x: 0.1441319,
                 y: 0.967980564,
                 z: 0.2055228,
-                magnitude: 1.0,
-                sqrMagnitude: 1.0
             },
         },
         {
@@ -24,8 +24,7 @@ export const TITSEventSource: EventSource = {
             name: "T.I.T.S Trigger Activated",
             description: "When a trigger is activated in T.I.T.S",
             manualMetadata: {
-                triggerId: "00000000-0000-0000-0000-000000000000",
-                triggerName: "Test Trigger"
+                triggerID: "00000000-0000-0000-0000-000000000000"
             },
         },
         {
@@ -33,8 +32,7 @@ export const TITSEventSource: EventSource = {
             name: "T.I.T.S Trigger Ended",
             description: "When a trigger has ended in T.I.T.S",
             manualMetadata: {
-                triggerId: "00000000-0000-0000-0000-000000000000",
-                triggerName: "Test Trigger"
+                triggerID: "00000000-0000-0000-0000-000000000000"
             },
         },
     ],
