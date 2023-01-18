@@ -1,9 +1,10 @@
 import { ReplaceVariable } from "@crowbartools/firebot-custom-scripts-types/types/modules/replace-variable-manager";
 import {Effects} from "@crowbartools/firebot-custom-scripts-types/types/effects";
 import TriggersObject = Effects.TriggersObject;
+import {getTriggers} from "../../tits-connector";
 
 const triggers: TriggersObject = {};
-triggers["event"] = ["dennisontheinternet-tits:hit"]
+triggers["event"] = ["dennisontheinternet-tits:trigger-activated", "dennisontheinternet-tits:trigger-ended", "dennisontheinternet-tits:hit"]
 
 export const TriggerNameVariable: ReplaceVariable = {
     definition: {
@@ -14,8 +15,18 @@ export const TriggerNameVariable: ReplaceVariable = {
         categories: ["trigger based"],
         possibleDataOutput: ["text"]
     },
-    evaluator(trigger) {
-        // @ts-ignore
-        return trigger.metadata.eventData.triggerName;
+    evaluator: async (trigger) => {
+        if (trigger.metadata.event.id === "dennisontheinternet-tits:hit") {
+            return trigger.metadata.eventData.triggerName;
+        }
+
+        const triggers = await getTriggers();
+
+        triggers.forEach(titsTrigger => {
+            if (titsTrigger.ID === trigger.metadata.eventData.triggerID) {
+                return titsTrigger.name;
+            }
+        });
+        return "Unknown";
     }
 }
