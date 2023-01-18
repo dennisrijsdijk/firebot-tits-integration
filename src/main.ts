@@ -1,5 +1,6 @@
 import {Firebot, ScriptModules} from "@crowbartools/firebot-custom-scripts-types";
 import {TITSEventSource} from "./events";
+import {disconnectSockets, initializeSockets} from "./tits-connector";
 
 interface Params {
   baseEndpoint: string;
@@ -29,6 +30,15 @@ const script: Firebot.CustomScript<Params> = {
     baseEndpoint = runRequest.parameters.baseEndpoint;
     modules = runRequest.modules;
     modules.eventManager.registerEventSource(TITSEventSource);
+    initializeSockets();
+  },
+  parametersUpdated(parameters: Params) {
+    disconnectSockets();
+    baseEndpoint = parameters.baseEndpoint;
+    initializeSockets();
+  },
+  stop() {
+    disconnectSockets();
   },
 };
 
