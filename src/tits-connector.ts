@@ -148,10 +148,11 @@ export const throwItems = (items: string[], delayTime: number, amountOfThrows: n
             requestID: requestID,
             messageType: "TITSThrowItemsRequest",
             data: {
-                items: items
-            },
-            delayTime: delayTime,
-            amountOfThrows: amountOfThrows
+                items: items,
+                delayTime: delayTime,
+                amountOfThrows: amountOfThrows,
+                errorOnMissingID: false
+            }
         }));
     });
 }

@@ -7,6 +7,8 @@ import {YDirectionVariable} from "./variables/throw-event/y";
 import {ItemIdVariable} from "./variables/throw-event/item-id";
 import {ItemNameVariable} from "./variables/throw-event/item-name";
 import {StrengthVariable} from "./variables/throw-event/strength";
+import {ThrowEffectType} from "./effects/throw-items-effect";
+import {setupFrontendListeners} from "./communicator";
 
 interface Params {
   baseEndpoint: string;
@@ -42,6 +44,8 @@ const script: Firebot.CustomScript<Params> = {
     modules.replaceVariableManager.registerReplaceVariable(XDirectionVariable);
     modules.replaceVariableManager.registerReplaceVariable(YDirectionVariable);
     modules.replaceVariableManager.registerReplaceVariable(ZDirectionVariable);
+    setupFrontendListeners()
+    modules.effectManager.registerEffect(ThrowEffectType);
     initializeSockets();
   },
   parametersUpdated(parameters: Params) {
